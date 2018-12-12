@@ -35,7 +35,19 @@ class Autor
     
     public function get($id)
     {
-        //TODO
+        try {
+            $stm = $this->conn->prepare("SELECT id_aut, nom_aut, fk_nacionalitat FROM autors WHERE ID_AUT =:id");
+            $stm->bindValue(':id', $id);
+            $stm->execute();
+            $autor=$stm->fetch();
+            $this->resposta->setDades($autor);
+			$this->resposta->setCorrecta(true);      
+            return $this->resposta;
+		}
+        catch(Exception $e) {   // hi ha un error posam la resposta a fals i tornam missatge d'error
+            $this->resposta->setCorrecta(false, $e->getMessage());
+            return $this->resposta;
+        }
     }
 
     
@@ -73,7 +85,30 @@ class Autor
     
     public function update($data)
     {
-        // TODO
+        try 
+		{
+                $id_aut=$data['id_aut'];
+                $nom_aut=$data['nom_aut'];
+                $fk_nacionalitat=$data['fk_nacionalitat'];
+
+                $sql = "UPDATE autors SET nom_aut =:nom_aut, fk_nacionalitat =:fk_nacionalitat WHERE id_aut =:id_aut";
+
+                // UPDATE `autors` SET `NOM_AUT` = '$valorGuardar', `FK_NACIONALITAT` = null WHERE `ID_AUT` = $idguardar";
+                
+                $stm=$this->conn->prepare($sql);
+                $stm->bindValue(':id_aut',$id_aut);
+                $stm->bindValue(':nom_aut',$nom_aut);
+                $stm->bindValue(':fk_nacionalitat',!empty($fk_nacionalitat)?$fk_nacionalitat:NULL,PDO::PARAM_STR);
+                $stm->execute();
+            
+       	        $this->resposta->setCorrecta(true);
+                return $this->resposta;
+        }
+        catch (Exception $e) 
+		{
+                $this->resposta->setCorrecta(false, "Error insertant: ".$e->getMessage());
+                return $this->resposta;
+		}
     }
 
     

@@ -1,1 +1,11 @@
-Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`bioblioteca`.`autors`, CONSTRAINT `INTEG_24` FOREIGN KEY (`FK_NACIONALITAT`) REFERENCES `nacionalitats` (`NACIONALITAT`) ON DELETE CASCADE ON UPDATE SET NULL)Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'
+Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1452 
+Cannot add or update a child row: a foreign key constraint fails 
+(`bioblioteca`.`autors`, CONSTRAINT `INTEG_24` FOREIGN KEY (`FK_NACIONALITAT`) REFERENCES `nacionalitats` 
+(`NACIONALITAT`) ON DELETE CASCADE ON UPDATE SET NULL)
+Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 
+Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: 
+Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'
+Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1452 
+Cannot add or update a child row: a foreign key constraint fails 
+(`biblioteca`.`autors`, CONSTRAINT `INTEG_24` FOREIGN KEY (`FK_NACIONALITAT`) REFERENCES `nacionalitats` 
+(`NACIONALITAT`) ON DELETE CASCADE ON UPDATE SET NULL)Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Tomeu Campaner' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Campaner, Tomeu' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Campaner, Tomeu' for key 'U_NOMAUT'Error insertant: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Campaner, Tomeu' for key 'U_NOMAUT'
