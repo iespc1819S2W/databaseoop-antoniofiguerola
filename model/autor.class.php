@@ -106,7 +106,7 @@ class Autor
         }
         catch (Exception $e) 
 		{
-                $this->resposta->setCorrecta(false, "Error insertant: ".$e->getMessage());
+                $this->resposta->setCorrecta(false, "Error actualitzant: ".$e->getMessage());
                 return $this->resposta;
 		}
     }
@@ -115,12 +115,79 @@ class Autor
     
     public function delete($id)
     {
-        // TODO
+        try 
+		{
+            $id_aut=$id;
+
+            $sql = "DELETE FROM autors WHERE id_aut =:id_aut";
+            
+            $stm=$this->conn->prepare($sql);
+            $stm->bindValue(':id_aut',$id_aut);
+            $stm->execute();
+            
+       	    $this->resposta->setCorrecta(true);
+            return $this->resposta;
+        }
+        catch (Exception $e) 
+		{
+            $this->resposta->setCorrecta(false, "Error eliminant: ".$e->getMessage());
+            return $this->resposta;
+		}
+
     }
 
     public function filtra($where,$orderby,$offset,$count)
     {
         // TODO
+        try 
+		{
+            $sql = "SELECT id_aut,nom_aut,fk_nacionalitat FROM autors";
+
+            if (!empty($where)) {
+                $sql += $where;
+            }
+
+            if (!empty($orderBy)) {
+                $sql += $orderBy;
+            }
+
+            if (!empty())
+
+            // $id_aut=$id;
+
+            // $sql = "DELETE FROM autors WHERE id_aut =:id_aut";
+            
+            // $stm=$this->conn->prepare($sql);
+            // $stm->bindValue(':id_aut',$id_aut);
+            // $stm->execute();
+            
+       	    // $this->resposta->setCorrecta(true);
+            // return $this->resposta;
+        }
+        catch (Exception $e) 
+		{
+            $this->resposta->setCorrecta(false, "Error filtrant: ".$e->getMessage());
+            return $this->resposta;
+		}
+
+        // $sql="SELECT ID_AUT, NOM_AUT, FK_NACIONALITAT FROM `autors`";
+        // $where="";
+        // $valor = "";
+        // $numRegPag = isset($_POST['numRegPag'])?$_POST['numRegPag']:20;
+        // // Cercar
+        // if (isset($_POST['cercar']) && $_POST['cercar'] != "") {
+        //     $valor = $mysqli->real_escape_string($_POST['cercar']);
+        //     $where=" WHERE ID_AUT = '$valor' OR NOM_AUT LIKE '%$valor%'";
+        // }
+        // // Consulta paginacio
+        // $orderBy=" ORDER BY $ordre"; 
+        // $result = $mysqli->query($sql.$where);
+        // $numRegistres = mysqli_num_rows($result);
+        // $numPaginas = ceil($numRegistres/$numRegPag);
+        // $iniciTuples = ($pagina - 1) * $numRegPag;
+        // $limit = " LIMIT $iniciTuples , $numRegPag";
+        // $sql=$sql.$where.$orderBy.$limit;
+        // $result = $mysqli->query($sql);
     }
     
           
