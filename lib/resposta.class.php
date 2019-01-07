@@ -19,5 +19,10 @@ class Resposta
     public function SetDades($dades)
     {
         $this->dades=$dades;
+	}
+	
+	public function SetRegistres($registres)
+    {
+        $this->registres=$registres;
     }
 }

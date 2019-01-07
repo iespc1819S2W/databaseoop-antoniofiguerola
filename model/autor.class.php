@@ -142,27 +142,39 @@ class Autor
         try 
 		{
             $sql = "SELECT id_aut,nom_aut,fk_nacionalitat FROM autors";
-
+            $sqlCount="SELECT COUNT(*) AS total FROM autors";
+            
             if (!empty($where)) {
-                $sql += $where;
+                
+                // $sql = $sql." WHERE ID_AUT = :where";
+                $sql = $sql." WHERE ID_AUT = :where OR NOM_AUT LIKE :whereLike";
+                $sqlCount = $sqlCount." WHERE ID_AUT = :where OR NOM_AUT LIKE :whereLike";
             }
-
-            if (!empty($orderBy)) {
-                $sql += $orderBy;
+            
+            if (!empty($orderby)) {
+                $sql = $sql." ORDER BY $orderby";
             }
-
-            if (!empty())
-
-            // $id_aut=$id;
-
-            // $sql = "DELETE FROM autors WHERE id_aut =:id_aut";
             
-            // $stm=$this->conn->prepare($sql);
-            // $stm->bindValue(':id_aut',$id_aut);
-            // $stm->execute();
+            $sql = $sql." LIMIT $offset, $count";
+
             
-       	    // $this->resposta->setCorrecta(true);
-            // return $this->resposta;
+            $stm=$this->conn->prepare($sql);
+            $stm->bindValue(':where', $where);
+            $stm->bindValue(':whereLike', "%$where%");
+            $stm->execute();
+            
+            $tuples=$stm->fetchAll();
+            $this->resposta->setDades($tuples);
+            $this->resposta->setCorrecta(true);
+
+            $stmC=$this->conn->prepare($sqlCount);
+            $stmC->bindValue(':where', $where);
+            $stmC->bindValue(':whereLike', "%$where%");
+            $stmC->execute();
+            $num=$stmC->fetchAll();
+            $this->resposta->setRegistres($num[0]["total"]);
+
+            return $this->resposta;
         }
         catch (Exception $e) 
 		{
@@ -170,24 +182,6 @@ class Autor
             return $this->resposta;
 		}
 
-        // $sql="SELECT ID_AUT, NOM_AUT, FK_NACIONALITAT FROM `autors`";
-        // $where="";
-        // $valor = "";
-        // $numRegPag = isset($_POST['numRegPag'])?$_POST['numRegPag']:20;
-        // // Cercar
-        // if (isset($_POST['cercar']) && $_POST['cercar'] != "") {
-        //     $valor = $mysqli->real_escape_string($_POST['cercar']);
-        //     $where=" WHERE ID_AUT = '$valor' OR NOM_AUT LIKE '%$valor%'";
-        // }
-        // // Consulta paginacio
-        // $orderBy=" ORDER BY $ordre"; 
-        // $result = $mysqli->query($sql.$where);
-        // $numRegistres = mysqli_num_rows($result);
-        // $numPaginas = ceil($numRegistres/$numRegPag);
-        // $iniciTuples = ($pagina - 1) * $numRegPag;
-        // $limit = " LIMIT $iniciTuples , $numRegPag";
-        // $sql=$sql.$where.$orderBy.$limit;
-        // $result = $mysqli->query($sql);
     }
     
           
